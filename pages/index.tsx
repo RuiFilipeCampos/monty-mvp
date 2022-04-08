@@ -37,8 +37,8 @@ const Home: NextPage = () => {
 
             <ch.Text>
               Other examples are: PENELOPE(the golden standard of Medical
-              Physics), GEANT4 (used at CERN), MCNPX (the OG, developed for the
-              Manhaten project), [MORE]
+              Physics), GEANT4 (used at CERN), MCNPX (the OG, compiled from the
+              original developments at the Manhaten project), [MORE]
             </ch.Text>
 
             <ch.Button
