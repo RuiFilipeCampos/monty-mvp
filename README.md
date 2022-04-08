@@ -123,7 +123,7 @@ To get a local copy up and running follow these simple example steps.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - mail@ruicampos.org@mail@ruicampos.org_client.com
+Rui Campos - mail@ruicampos.org
 
 Project Link: [https://github.com/RuiFilipeCampos/monty-mvp](https://github.com/RuiFilipeCampos/monty-mvp)
 
