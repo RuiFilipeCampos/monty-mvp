@@ -22,8 +22,13 @@ const Demo: NextPage = () => {
 
 export default Demo;
 
-const GeometrySelector = ({ selected, setSelected }) => {
-  const image_links = {
+interface selectGeometry{
+  selected:string,
+  setSelected:any,
+}
+
+const GeometrySelector = ({ selected, setSelected }:selectGeometry) => {
+  const image_links:any = {
     none: "",
     sphere: "",
     onion:
@@ -41,10 +46,10 @@ const GeometrySelector = ({ selected, setSelected }) => {
           onChange={(event) => setSelected(event.target.value)}
         >
           <option value="sphere">
-            Sphere (image not available) (option 404's)
+            Sphere (image not available) (option 404s)
           </option>
           <option value="onion">Onion</option>
-          <option value="sphere-cut">A Cut Sphere (option 404's)</option>
+          <option value="sphere-cut">A Cut Sphere (option 404s)</option>
         </ch.Select>
 
         <ch.FormHelperText>
@@ -65,7 +70,12 @@ const GeometrySelector = ({ selected, setSelected }) => {
   );
 };
 
-const FormNavigation = ({ previous, next }) => {
+interface FormNavigationInput {
+  previous:string,
+  next:string,
+}
+
+const FormNavigation = ({ previous, next }:FormNavigationInput):JSX.Element => {
   const router = useRouter();
   return (
     <>

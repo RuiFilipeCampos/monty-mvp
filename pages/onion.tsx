@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 
 const Demo: NextPage = () => {
   const [layers, setLayers] = React.useState(3);
-  const handleChange = (value) => setLayers(value);
+  const handleChange = (value: any) => setLayers(value); // I should check this again, note for future self: go over the types, see onChange
 
   return (
     <>
@@ -47,11 +47,9 @@ const Demo: NextPage = () => {
                   <ch.SliderTrack>
                     <ch.SliderFilledTrack />
                   </ch.SliderTrack>
-                  <ch.SliderThumb
-                    fontSize="sm"
-                    boxSize="32px"
-                    children={layers}
-                  />
+                  <ch.SliderThumb fontSize="sm" boxSize="32px">
+                    {layers}
+                  </ch.SliderThumb>
                 </ch.Slider>
               </ch.HStack>
 
@@ -83,7 +81,7 @@ const LayerSelector = () => {
       "https://user-images.githubusercontent.com/63464503/137699819-3dad4fb6-7e76-4a5c-89b4-86924a62105c.png",
   };
 
-  const handleSelection = (event) => setSelected(event.target.value);
+  // const handleSelection = (event) => setSelected(event.target.value);
 
   return (
     <>
@@ -112,7 +110,12 @@ const LayerSelector = () => {
   );
 };
 
-const FormNavigation = ({ previous, next }) => {
+interface FormNavigationInput {
+  previous: string,
+  next: string,
+}
+
+const FormNavigation = ({ previous, next }: FormNavigationInput) => {
   const router = useRouter();
 
   return (

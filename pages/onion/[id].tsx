@@ -9,35 +9,46 @@ import * as d3 from "d3";
 
 const RD3Component = rd3.Component;
 
-function D3Component({ radius_list }) {
+function D3Component({ radius_list }: any) {
   const [nodeToRender, setNodeToRender] = React.useState(null);
   const ref = React.useRef(null);
 
 
-  const draw = () => {
-    var width: number = ref.current ? ref.current.offsetWidth : 0;
-    var node = document.createElement("div");
+  const draw = React.useCallback(
+    () => {
+      var width: number = ref.current ? ref.current.offsetWidth : 0;
+      var node = document.createElement("div");
 
-    var svg = d3
-      .select(node)
-      .append("svg")
-      .attr("width", width)
-      .attr("height", 300);
+      var svg = d3
+        .select(node)
+        .append("svg")
+        .attr("width", width)
+        .attr("height", 300);
 
-    let region_number: number = 1;
-    let previous_radius: number = 0;
-    for (let _radius of radius_list) {
-      let current_radius: number = (_radius / 100) * width;
+      let region_number: number = 1;
+      let previous_radius: number = 0;
+      for (let _radius of radius_list) {
+        let current_radius: number = (_radius / 100) * width;
 
-      let arc = d3.arc()
-        .innerRadius(current_radius - 2)
-        .outerRadius(current_radius)
-        .startAngle(45 * (Math.PI / 180)) //converting from degs to radians
-        .endAngle(3); //just radians
+        let arc = d3.arc()
+          .innerRadius(current_radius - 2)
+          .outerRadius(current_radius)
+          .startAngle(45 * (Math.PI / 180)) //converting from degs to radians
+          .endAngle(3); //just radians
 
-      svg
-        .append("path")
-        .attr("d", arc);
+        svg
+          .append("path")
+          .attr("d", arc);
+
+        svg
+          .append("text")
+          .text(`Region ${region_number}`)
+          .attr("y", 25)
+          .attr("x", 30 + (radius_list[region_number - 2] / 100) * width);
+
+        previous_radius = current_radius;
+        ++region_number;
+      }
 
       svg
         .append("text")
@@ -45,21 +56,12 @@ function D3Component({ radius_list }) {
         .attr("y", 25)
         .attr("x", 30 + (radius_list[region_number - 2] / 100) * width);
 
-      previous_radius = current_radius;
-      ++region_number;
-    }
+      setNodeToRender(node);
+    }, [radius_list]
+  )
 
-    svg
-      .append("text")
-      .text(`Region ${region_number}`)
-      .attr("y", 25)
-      .attr("x", 30 + (radius_list[region_number - 2] / 100) * width);
-
-    setNodeToRender(node);
-  };
-
-  React.useEffect(() => draw(), [radius_list, nodeToRender]);
-  React.useEffect(() => window.addEventListener("resize", draw), []);
+  React.useEffect(() => draw(), [radius_list, nodeToRender, draw]);
+  React.useEffect(() => window.addEventListener("resize", draw), [draw]);
 
   return (
     <>
@@ -286,17 +288,13 @@ const Onion: NextPage = (): JSX.Element => {
     for (let i = 0; i < radiusList.length; ++i) {
       ret.push(
         <>
-          <ch.RangeSliderThumb
-            w="35px"
-            index={i}
-            children={
-              <ch.Text fontSize="10">
-                {
-                  `${radiusList[i]} cm`
-                }
-              </ch.Text>
-            }
-          />
+          <ch.RangeSliderThumb w="35px" index={i}>
+            <ch.Text fontSize="10">
+              {
+                `${radiusList[i]} cm`
+              }
+            </ch.Text>
+          </ch.RangeSliderThumb>
         </>
       );
     }
@@ -334,7 +332,7 @@ const Onion: NextPage = (): JSX.Element => {
               Geometry Definition
             </ch.FormLabel>
             <ch.RangeSlider
-              aria-label={["min", "max"]}
+              // aria-label={["min", "max"]}
               defaultValue={radiusList}
               minStepsBetweenThumbs={10}
               onChange={ /* Prevents values below 10cm. */
@@ -393,7 +391,7 @@ const Onion: NextPage = (): JSX.Element => {
               </option>
             </ch.Select>
             <ch.FormHelperText>
-              Photons don't interact much with matter (generally result in quicker simulations). Charged particles like Positrons and Electrons interact much more with the medium.
+              {"Photons don't interact much with matter (generally result in quicker simulations). Charged particles like Positrons and Electrons interact much more with the medium."}
             </ch.FormHelperText>
           </ch.FormControl>
 
