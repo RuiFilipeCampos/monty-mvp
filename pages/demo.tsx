@@ -22,8 +22,13 @@ const Demo: NextPage = () => {
 
 export default Demo;
 
-const GeometrySelector = ({ selected, setSelected }) => {
-  const image_links = {
+interface selectGeometry{
+  selected:string,
+  setSelected:any,
+}
+
+const GeometrySelector = ({ selected, setSelected }:selectGeometry) => {
+  const image_links:any = {
     none: "",
     sphere: "",
     onion:
@@ -65,7 +70,12 @@ const GeometrySelector = ({ selected, setSelected }) => {
   );
 };
 
-const FormNavigation = ({ previous, next }) => {
+interface FormNavigationInput {
+  previous:string,
+  next:string,
+}
+
+const FormNavigation = ({ previous, next }:FormNavigationInput):JSX.Element => {
   const router = useRouter();
   return (
     <>

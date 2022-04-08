@@ -9,7 +9,7 @@ import * as d3 from "d3";
 
 const RD3Component = rd3.Component;
 
-function D3Component({ radius_list }) {
+function D3Component({ radius_list }:any) {
   const [nodeToRender, setNodeToRender] = React.useState(null);
   const ref = React.useRef(null);
 
