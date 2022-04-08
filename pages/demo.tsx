@@ -46,10 +46,10 @@ const GeometrySelector = ({ selected, setSelected }:selectGeometry) => {
           onChange={(event) => setSelected(event.target.value)}
         >
           <option value="sphere">
-            Sphere (image not available) (option 404's)
+            Sphere (image not available) (option 404s)
           </option>
           <option value="onion">Onion</option>
-          <option value="sphere-cut">A Cut Sphere (option 404's)</option>
+          <option value="sphere-cut">A Cut Sphere (option 404s)</option>
         </ch.Select>
 
         <ch.FormHelperText>

@@ -30,9 +30,9 @@ const Home: NextPage = () => {
             </ch.Text>
 
             <ch.Text>
-              This demo is to showcase a fraction of what this program in
-              capable, and, for that matter, what codes that are in the category
-              "general purpose particle simulators" are capable.
+              {"This demo is to showcase a fraction of what this program in" +
+              "capable, and, for that matter, what codes that are in the category" +
+              "'general purpose particle simulators' are capable."}
             </ch.Text>
 
             <ch.Text>
