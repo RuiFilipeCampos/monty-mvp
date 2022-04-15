@@ -1,0 +1,4 @@
+[submodule "monty-mvp-mock-websocket"]
+	path = monty-mvp-mock-websocket
+	url = https://github.com/RuiFilipeCampos/monty-mvp-mock-websocket.git
+	branch = develop
