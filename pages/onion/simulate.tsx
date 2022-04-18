@@ -26,7 +26,7 @@ const Onion: NextPage = (): JSX.Element => {
         { "__MESSAGE__": "monty", ...router.query }
         )
     ),
-    []
+    [sendMessage]
   );
 
   handleClickSendMessage()
