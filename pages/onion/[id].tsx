@@ -379,7 +379,7 @@ const Onion: NextPage = (): JSX.Element => {
               Particle Type
             </ch.FormLabel>
 
-            <ch.Select placeholder="Select Particle" onChange={val => setParticle(val)}>
+            <ch.Select placeholder="Select Particle" onChange={e => setParticle(e.target.value)}>
               <option value="photon">
                 Photon
               </option>
@@ -400,7 +400,7 @@ const Onion: NextPage = (): JSX.Element => {
             <ch.FormLabel>
               Energy
             </ch.FormLabel>
-            <ch.Select placeholder="Select Initial Energy" onChange={val => setEnergy(val)}>
+            <ch.Select placeholder="Select Initial Energy" onChange={e => setEnergy(e.target.value)}>
               <option value="1">
                 1MeV
               </option>
