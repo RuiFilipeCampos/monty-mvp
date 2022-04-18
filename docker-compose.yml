@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  monty: 
+      build: monty
+      ports:
+        1000:1000
+  client:
+    build: .
+    ports:
+      - "3000:3000"
+  websocket0:
+    build: monty-mvp-mock-websocket
+    ports:
+      - "8080:8080"
