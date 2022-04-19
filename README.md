@@ -87,6 +87,21 @@
 
 [TO DO]
 
+
+This project is composed by several microservices. See the following figure:
+
+![image](https://user-images.githubusercontent.com/63464503/163921435-c78dbb57-4e65-4362-8498-0b25a2088825.png)
+
+- All applications are running in docker containers. 
+- The frontend application communicates with a resource management microservice via a websocket.
+- The resource management microservice takes care of running docker images containing MontyCarlo and the pre-prepared geometry and materials
+- There are 3 images per 100x port because there are 3 demos:
+   - sphere
+   - onion
+   - cut sphere
+
+
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
