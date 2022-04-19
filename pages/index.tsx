@@ -45,7 +45,7 @@ export default function CallToActionWithAnnotation() {
             This is a minimalistic website to showcase
             live demonstrations of my very own general 
             purpose high energy particle simulator.
-            MontyCarlo is a cool name by the way, it's an easter egg!
+            MontyCarlo is a cool name by the way, it&apos;s an easter egg!
           </Text>
           <Stack
             direction={'column'}
