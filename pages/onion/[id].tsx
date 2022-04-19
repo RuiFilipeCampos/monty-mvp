@@ -219,8 +219,8 @@ const Title = () => <>
 </>
 
 const Layout = (props) => {
-  return <>  <ch.Flex w="100vw" h="full">
-    <ch.Flex shadow="md" w="full" h="full" p="10" m="50">
+  return <>  <ch.Flex  w="100vw" h="full">
+    <ch.Flex bg="white" rounded="lg" shadow="md" w="full" h="full" p="10" m="50">
       <ch.VStack w="full">
         <Title />
         <ch.Spacer />
@@ -322,7 +322,7 @@ const Onion: NextPage = (): JSX.Element => {
   return (
     <>
       <Layout onSubmit={handleSubmit}>
-        <ch.Box w="full">
+        <ch.Box w="full" >
 
 
 
