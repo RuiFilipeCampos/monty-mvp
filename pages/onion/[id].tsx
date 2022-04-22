@@ -6,6 +6,7 @@ import { NextRouter, useRouter } from "next/router";
 import rd3 from "react-d3-library";
 
 import * as d3 from "d3";
+import { FormEventHandler } from "react";
 
 const RD3Component = rd3.Component;
 
@@ -219,8 +220,8 @@ const Title = () => <>
 </>
 
 const Layout = (props) => {
-  return <>  <ch.Flex w="100vw" h="full">
-    <ch.Flex shadow="md" w="full" h="full" p="10" m="50">
+  return <>  <ch.Flex  w="100vw" h="full">
+    <ch.Flex bg="white" rounded="lg" shadow="md" w="full" h="full" p="10" m="50">
       <ch.VStack w="full">
         <Title />
         <ch.Spacer />
@@ -302,27 +303,29 @@ const Onion: NextPage = (): JSX.Element => {
     return ret;
   };
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
+  const handleSubmit = (eventHandler: FormEventHandler<HTMLFormElement> ) => {
+    eventHandler.preventDefault();
 
     let parameters = {
-      n: id,
+      geometry:'onion',
+      numberOfLayers: id,
       radiusList: radiusList,
       materialList: [...materialList, 'gold'],
       particle: particle,
-      energy: energy
+      energy: energy,
+      numberOfParticles:'fixed-server-side'
     }
 
 
     const u = new URLSearchParams(parameters).toString();
-    window.open('/onion/simulate' + '?' + u)
+    window.open('/simulate' + '?' + u)
   }
 
 
   return (
     <>
       <Layout onSubmit={handleSubmit}>
-        <ch.Box w="full">
+        <ch.Box w="full" >
 
 
 

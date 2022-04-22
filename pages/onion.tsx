@@ -11,7 +11,7 @@ const Demo: NextPage = () => {
   return (
     <>
       <ch.Flex w="100vw" h="full">
-        <ch.Flex shadow="md" w="full" h="full" p="10" m="50">
+        <ch.Flex bg="white" rounded="lg" shadow="md" w="full" h="full" p="10" m="50">
           <ch.VStack w="full">
             <ch.HStack w="full">
               <ch.Heading>The Onion</ch.Heading>
