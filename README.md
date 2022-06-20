@@ -85,23 +85,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[TO DO]
-
-
-This project is composed by several microservices. See the following figure:
-
-![image](https://user-images.githubusercontent.com/63464503/163921435-c78dbb57-4e65-4362-8498-0b25a2088825.png)
-
-![image](https://user-images.githubusercontent.com/63464503/165118815-67073ec8-e063-4804-88fe-2c9494db6b03.png)
-
-
-- All applications are running in docker containers. 
-- The frontend application communicates with a resource management microservice via a websocket.
-- The resource management microservice takes care of running docker images containing MontyCarlo and the pre-prepared geometry and materials
-- There are 3 images per 100x port because there are 3 demos:
-   - sphere
-   - onion
-   - cut sphere
+This is a minimalistic website for showcasing MontyCarlo in the 4th European Congress of Medical Physics.
 
 
 
@@ -111,7 +95,10 @@ This project is composed by several microservices. See the following figure:
 
 ### Built With
 
+* [MontyCarlo]()
 * [Next.js](https://nextjs.org/)
+* [Django]()
+* [Docker]()
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -120,22 +107,105 @@ This project is composed by several microservices. See the following figure:
 <!-- GETTING STARTED -->
 ## Getting Started
 
-
 To get a local copy up and running follow these simple example steps.
 
-[ TO DO ]
 
 ### Prerequisites
 
-[to do]
+- Docker
 
 ### Installation
 
-[to do]
+1. Clone the repository and cd into it;
+
+```
+git clone git@github.com:RuiFilipeCampos/monty-mvp.git
+cd monty-mvp
+```
+
+2. Docker compose it
+
+```
+docker-compose up
+```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
+
+<!-- ROADMAP -->
+## Roadmap
+
+- [x] /simple_sphere/ - frontend page: performs GET /sphere/ on backend, graphs the result (graph takes a while to load, wait for it)
+
+![](docs/simple_sphere.gif)
+
+- [ ] /sphere/ - frontend page: performs POST /sphere/ on backend with parameters as payload
+- [ ] /onion/
+- [ ] /cut-sphere/
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- CONTRIBUTING -->
+## Contributing
+
+To get a copy for local development up and running follow these simple example steps.
+
+
+### Prerequisites
+
+- yarn
+- poetry
+- docker
+
+### Installation
+
+Start by cloning the repository
+
+```
+git clone git@github.com:RuiFilipeCampos/monty-mvp.git
+cd monty-mvp
+```
+
+#### Client Side Code
+
+1. Install client side packages
+
+```
+cd client
+yarn
+```
+
+2. Start the development server
+
+```
+yarn dev
+```
+
+This will get the frontend up and running on port localhost:8000 and on port 8000 of your local network. 
+
+#### Server Side Code
+
+1. Setup poetry
+
+```
+cd server
+poetry shell
+```
+
+2. Install server code dependencies
+
+```
+poetry install
+```
+
+3. Run the development server
+
+```
+python manage.py runserver 8000
+```
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 
 <!-- CONTACT -->

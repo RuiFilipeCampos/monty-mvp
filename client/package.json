@@ -1,0 +1,39 @@
+{
+    "name": "monty-mvp",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint",
+        "build_websocket": "cd monty-mvp-mock-websocket/server && cmake . && cmake --build . && cd ../../",
+        "run_websocket": "cd monty-mvp-mock-websocket/server/debug && server.exe && ../../"
+    },
+    "dependencies": {
+        "@chakra-ui/react": "^1.8.7",
+        "@emotion/react": "11",
+        "@emotion/styled": "11",
+        "@react-three/drei": "^9.13.0",
+        "@react-three/fiber": "^8.0.22",
+        "axios": "^0.27.2",
+        "d3": "^7.4.1",
+        "framer-motion": "6",
+        "next": "12.1.4",
+        "next-http-proxy-middleware": "^1.2.4",
+        "react": "18.0.0",
+        "react-d3-library": "^1.1.8",
+        "react-dom": "18.0.0",
+        "react-spring": "^9.4.5",
+        "react-use-websocket": "^3.0.0",
+        "three": "^0.141.0"
+    },
+    "devDependencies": {
+        "@types/node": "17.0.23",
+        "@types/react": "17.0.43",
+        "@types/react-dom": "17.0.14",
+        "eslint": "8.12.0",
+        "eslint-config-next": "12.1.4",
+        "typescript": "4.6.3"
+    }
+}

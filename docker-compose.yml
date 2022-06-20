@@ -1,10 +1,10 @@
 version: "3.9"
 services:
   client:
-    build: .
+    build: /client/
     ports:
       - "3000:3000"
-  websocket0:
-    build: monty-mvp-mock-websocket
+  server:
+    build: /server/
     ports:
-      - "8080:8080"
+      - "8000:8000"
