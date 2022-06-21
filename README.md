@@ -193,7 +193,7 @@ cd server
 docker build . -t monty-mvp:server
 ```
 
-2. Start a container with this image, map its LAN 8000 to your localhost 8000
+2. Start a container with this image, map its 0.0.0.0:8000 to your localhost:8000
 
 ```
 docker run -itp 8000:8000 monty-mvp:server
