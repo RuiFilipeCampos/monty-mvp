@@ -186,23 +186,17 @@ This will get the frontend up and running on port localhost:8000 and on port 800
 
 #### Server Side Code
 
-1. Setup poetry
+1. Perform the first docker build. This will take a while the first time, but is instantaneous afterwards(just make sure not to change the generate_materials.py file). 
 
 ```
 cd server
-poetry shell
+docker build . -t monty-mvp:server
 ```
 
-2. Install server code dependencies
+2. Start a container with this image, map its LAN 8000 to your localhost 8000
 
 ```
-poetry install
-```
-
-3. Run the development server
-
-```
-python manage.py runserver 8000
+docker run -itp 8000:8000 monty-mvp:server
 ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
