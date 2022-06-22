@@ -1,10 +1,11 @@
 import type { NextPage } from "next";
 
 import React from "react";
-import * as ch from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from 'react-redux'
+import * as ch from "@chakra-ui/react";
 
+// Internal Imports
 import {
   setRadius,
   setNumberOfParticles,
@@ -13,16 +14,17 @@ import {
   setParticleType,
 } from "../../features/sphereSlice"
 
-
 import { AppDispatch, RootState } from "../../app/store";
+import Layout from "../../components/Layout";
+
 
 
 const Demo: NextPage = () => {
 
   const sphere = useSelector((state: RootState) => state.sphere)
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
 
     let parameters: any = {
       geometry: 'sphere',
@@ -33,20 +35,41 @@ const Demo: NextPage = () => {
       energy: sphere.energy
     }
 
-    const u: any = new URLSearchParams(parameters).toString();
-    window.open('/sphere/simulate' + '?' + u)
+    const query: string = new URLSearchParams(parameters).toString();
+    window.open('/sphere/simulate' + '?' + query)
+  }
+
+  const css = {
+    '&::-webkit-scrollbar': {
+      width: '2px',
+    },
+    '&::-webkit-scrollbar-track': {
+      width: '3px',
+    },
+    '&::-webkit-scrollbar-thumb': {
+      background: "gray",
+      borderRadius: '14px',
+    },
   }
 
   return (
     <>
-      <ch.Flex w="100vw" h="full">
-        <ch.Flex bg="white" rounded="lg" shadow="md" w="full" h="full" p="10" m="50">
-          <ch.VStack w="full">
+      <Layout>
+        <ch.Flex >
+          <ch.HStack w="full">
             <Header />
             <ch.Spacer />
-            <pre>{JSON.stringify(sphere, null, 4)}</pre>
             <form onSubmit={handleSubmit}>
-              <ch.VStack w="full" spacing={10}>
+              <ch.VStack
+                css={css}
+                overflowY="scroll"
+                w="full" h="full" p="10"
+                maxH="70vh"
+                spacing={10}
+                bg="white"
+                ml={10}
+                shadow="xs"
+              >
                 <RadiusField />
                 <NumberOfParticlesField />
                 <MaterialField />
@@ -55,9 +78,9 @@ const Demo: NextPage = () => {
                 <SubmitButton />
               </ch.VStack>
             </form>
-          </ch.VStack>
+          </ch.HStack>
         </ch.Flex>
-      </ch.Flex>
+      </Layout>
     </>
   );
 };
@@ -67,12 +90,33 @@ export default Demo;
 
 const Header = (): JSX.Element => {
 
+  const sphere = useSelector((state: RootState) => state.sphere)
+
   return (
     <>
-      <ch.HStack w="full">
-        <ch.Heading>Sphere</ch.Heading>
-        <ch.Spacer />
-      </ch.HStack>
+      <ch.VStack w="40vw" h="full" alignItems="left">
+        <ch.Heading>Sphere...</ch.Heading>
+        <ch.Text>
+          Consider a sphere of radius <b>{sphere.radius}cm</b>,
+          centered at the origin of a cartesian reference system. This sphere
+          contains <b>{sphere.materialInside.toLowerCase()}</b> while the rest of space is permeated
+          with gold. An unidirectional, monoenergetic source of <b>{sphere.particleType.toLowerCase()}s</b> with
+          an energy of <b>{sphere.energy} MeV</b> will emit
+          a total of <b>{sphere.numberOfParticles} particles</b>.
+        </ch.Text>
+        <ch.HStack pt={5}>
+          <ch.Button type="submit" w="full" variant="outline" colorScheme="facebook">
+            Cancel
+          </ch.Button>
+          <ch.Button type="submit" w="full" variant="outline" colorScheme="facebook" >
+            Reset
+          </ch.Button>
+          <ch.Button type="submit" colorScheme="facebook" w="full" >
+            Simulate
+          </ch.Button>
+        </ch.HStack>
+
+      </ch.VStack>
     </>
   )
 }
@@ -88,7 +132,7 @@ const RadiusField = (): JSX.Element => {
   return (
     <>
       <ch.FormControl isRequired>
-        <ch.FormLabel>Choose a radius</ch.FormLabel>
+        <ch.FormLabel>Radius of the sphere: {radius}cm</ch.FormLabel>
         <ch.HStack>
           <ch.Slider
             flex="1"
@@ -102,8 +146,8 @@ const RadiusField = (): JSX.Element => {
               <ch.SliderFilledTrack />
             </ch.SliderTrack>
 
-            <ch.SliderThumb fontSize="sm" boxSize="32px">
-              {radius}
+            <ch.SliderThumb fontSize="xx-small" boxSize="32px">
+              {radius}cm
             </ch.SliderThumb>
 
           </ch.Slider>
@@ -123,6 +167,10 @@ const NumberOfParticlesField = (): JSX.Element => {
     (state: RootState) => state.sphere.numberOfParticles
   )
 
+  const particleType = useSelector(
+    (state: RootState) => state.sphere.particleType
+  )
+
   const dispatch = useDispatch<AppDispatch>()
 
   const handleChange = (value: number) => dispatch(setNumberOfParticles(value))
@@ -130,7 +178,7 @@ const NumberOfParticlesField = (): JSX.Element => {
   return (
     <>
       <ch.FormControl isRequired>
-        <ch.FormLabel>Number of Particles</ch.FormLabel>
+        <ch.FormLabel>Initial Number Particles: {numberOfParticles} {particleType.toLowerCase()}s </ch.FormLabel>
         <ch.HStack>
           <ch.Slider
             flex="1"
@@ -164,6 +212,8 @@ const MaterialField = (): JSX.Element => {
 
   const dispatch = useDispatch<AppDispatch>()
 
+
+
   const handleChange = (event) => {
     const value = event.target.value
     dispatch(setMaterialInside(value))
@@ -172,11 +222,11 @@ const MaterialField = (): JSX.Element => {
   return (
     <>
       <ch.FormControl isRequired>
-        <ch.FormLabel>Material</ch.FormLabel>
+        <ch.FormLabel>Material </ch.FormLabel>
 
-        <ch.Select placeholder="Select Material" onChange={handleChange}>
-          <option value="AIR">Air</option>
+        <ch.Select onChange={handleChange}>
           <option value="WATER">Water</option>
+          <option value="AIR">Air</option>
           <option value="GOLD">Gold</option>
         </ch.Select>
 
@@ -202,7 +252,7 @@ const ParticleTypeField = () => {
     <>
       <ch.FormControl isRequired>
         <ch.FormLabel>Particle Type</ch.FormLabel>
-        <ch.Select placeholder="Select Particle" onChange={handleChange}>
+        <ch.Select onChange={handleChange}>
           <option value="photon">Photon</option>
           <option value="electron">Electron</option>
           <option value="positron">Positrons</option>
@@ -228,17 +278,17 @@ const EnergyField = (): JSX.Element => {
     <>
       <ch.FormControl isRequired>
         <ch.FormLabel>
-          Energy
+          Energy:
         </ch.FormLabel>
-        <ch.Select placeholder="Select Initial Energy" onChange={handleChange}>
+        <ch.Select p onChange={handleChange}>
           <option value="1">
-            1MeV
+            1 MeV
           </option>
           <option value="10">
-            10MeV
+            10 MeV
           </option>
           <option value="30">
-            30MeV
+            30 MeV
           </option>
         </ch.Select>
         <ch.FormHelperText>
@@ -254,7 +304,7 @@ const SubmitButton = (): JSX.Element => {
   return (
     <>
       <ch.FormControl>
-        <ch.Button type="submit" colorScheme="facebook" w="full" >
+        <ch.Button type="submit" colorScheme="facebook" w="full" hidden>
           Simulate
         </ch.Button>
       </ch.FormControl>

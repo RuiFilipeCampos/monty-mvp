@@ -37,9 +37,9 @@ export interface SphereState {
 }
 
 const initialState: SphereState = {
-  radius: 25,
+  radius: 200,
   numberOfParticles:500,
-  energy:10,
+  energy:1,
   materialInside: WATER,
   particleType: PHOTON,
 }
